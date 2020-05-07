@@ -12,6 +12,10 @@
 */
 
 Route::get('/', function () {
+//    $user = App\User::find(1);
+//// Создание токена без указания прав...
+//    $token = $user->createToken('Token_Name')->accessToken;
+//    dd($token);
     return view('welcome');
 });
 

@@ -13,7 +13,16 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                        <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                            <passport-clients></passport-clients>
+                            <passport-authorized-clients></passport-authorized-clients>
+                            <passport-personal-access-tokens></passport-personal-access-tokens>
+                        </div>
                     You are logged in!
                 </div>
             </div>
