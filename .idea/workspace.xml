@@ -4,8 +4,6 @@
     <list default="true" id="78c81b5b-83b8-411e-9d08-7ddf31ce9f8b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthorsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthorsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -169,7 +167,7 @@
       <option name="presentableId" value="Default" />
       <updated>1588685896422</updated>
       <workItem from="1588685897714" duration="10637000" />
-      <workItem from="1588848894800" duration="21356000" />
+      <workItem from="1588848894800" duration="25124000" />
     </task>
     <servers />
   </component>
