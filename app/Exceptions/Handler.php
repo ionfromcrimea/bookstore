@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Collection;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -51,5 +53,24 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    protected function invalidJson($request, ValidationException $exception)
+    {
+        $errors = ( new Collection($exception->validator->errors()) )
+            ->map(function ($error, $key) {
+                return [
+                    'title' => 'Validation Error',
+                    'details' => $error[0],
+                    'source' => [
+                        'pointer' => '/' . str_replace('.', '/', $key),
+                    ]
+                ];
+            })
+            ->values();
+
+        return response()->json([
+            'errors' => $errors,
+        ], $exception->status);
     }
 }
