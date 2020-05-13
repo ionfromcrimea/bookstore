@@ -119,6 +119,7 @@
       <path value="$PROJECT_DIR$/vendor/wyrihaximus/react-child-process-promise" />
       <path value="$PROJECT_DIR$/vendor/wyrihaximus/ticking-promise" />
       <path value="$PROJECT_DIR$/vendor/yosymfony/resource-watcher" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-query-builder" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

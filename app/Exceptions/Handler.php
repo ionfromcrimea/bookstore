@@ -3,9 +3,13 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -33,8 +37,6 @@ class Handler extends ExceptionHandler
      *
      * @param  \Exception  $exception
      * @return void
-     *
-     * @throws \Exception
      */
     public function report(Exception $exception)
     {
@@ -46,13 +48,23 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Exception
+     * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    protected function prepareJsonResponse($request, Exception $e)
+    {
+        return response()->json([
+            'errors' => [
+                [
+                    'title' => Str::title(Str::snake(class_basename($e), ' ')),
+                    'details' => $e->getMessage(),
+                ]
+            ]
+        ], $this->isHttpException($e) ? $e->getStatusCode() : 500);
     }
 
     protected function invalidJson($request, ValidationException $exception)
@@ -60,9 +72,9 @@ class Handler extends ExceptionHandler
         $errors = ( new Collection($exception->validator->errors()) )
             ->map(function ($error, $key) {
                 return [
-                    'title' => 'Validation Error',
+                    'title'   => 'Validation Error',
                     'details' => $error[0],
-                    'source' => [
+                    'source'  => [
                         'pointer' => '/' . str_replace('.', '/', $key),
                     ]
                 ];
@@ -70,7 +82,22 @@ class Handler extends ExceptionHandler
             ->values();
 
         return response()->json([
-            'errors' => $errors,
+            'errors' => $errors
         ], $exception->status);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if($request->expectsJson()){
+            return response()->json([
+                'errors' => [
+                    [
+                        'title' => 'Unauthenticated',
+                        'details' => 'You are not authenticated',
+                    ]
+                ]
+                    ], 403);
+        }
+        return redirect()->guest($exception->redirectTo() ?? route('login'));
     }
 }
