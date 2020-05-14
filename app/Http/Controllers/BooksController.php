@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\Http\Requests\CreateBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\BooksResource;
 use App\Http\Resources\BooksCollection;
@@ -32,10 +33,10 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+//    public function create()
+//    {
+//        //
+//    }
 
     /**
      * Store a newly created resource in storage.
@@ -74,10 +75,10 @@ class BooksController extends Controller
      * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
-    {
-        //
-    }
+//    public function edit(Book $book)
+//    {
+//        //
+//    }
 
     /**
      * Update the specified resource in storage.
@@ -86,9 +87,10 @@ class BooksController extends Controller
      * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        $book->update($request->input('data.attributes'));
+        return new BooksResource($book);
     }
 
     /**
@@ -99,6 +101,7 @@ class BooksController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return response(null, 204);
     }
 }
