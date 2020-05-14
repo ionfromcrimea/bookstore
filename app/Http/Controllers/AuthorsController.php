@@ -23,7 +23,7 @@ class AuthorsController extends Controller
             'name',
             'created_at',
             'updated_at',
-        ])->get();
+        ])->jsonPaginate();
 
 //        return $authors;
         $responce = AuthorsResource::collection($authors);

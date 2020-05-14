@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78c81b5b-83b8-411e-9d08-7ddf31ce9f8b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/Unit/Exceptions/HandlerTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Unit/Middleware/EnsureCorrectAPIHeadersTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/bookstore.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/bookstore.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthorsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthorsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Feature/AuthorsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/AuthorsTest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -154,6 +148,7 @@
       <path value="$PROJECT_DIR$/vendor/wyrihaximus/ticking-promise" />
       <path value="$PROJECT_DIR$/vendor/yosymfony/resource-watcher" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-query-builder" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-json-api-paginate" />
     </include_path>
   </component>
   <component name="ProjectId" id="1bUTuiMMtzZ1CTgjcPcaYVuQhfr" />
@@ -197,7 +192,8 @@
       <workItem from="1588848894800" duration="45950000" />
       <workItem from="1589267036922" duration="618000" />
       <workItem from="1589269362200" duration="26312000" />
-      <workItem from="1589376587930" duration="4142000" />
+      <workItem from="1589376587930" duration="6274000" />
+      <workItem from="1589440560049" duration="724000" />
     </task>
     <servers />
   </component>

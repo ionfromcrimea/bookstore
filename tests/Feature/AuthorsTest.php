@@ -674,7 +674,6 @@ class AuthorsTest extends TestCase
     }
     /**
      * @test
-     * @watch
      */
     public function it_can_sort_authors_by_name_through_a_sort_query_parameter()
     {
@@ -728,7 +727,6 @@ class AuthorsTest extends TestCase
 
     /**
      * @test
-     * @watch
      */
     public function it_can_sort_authors_by_name_in_descending_order_through_a_sort_query_parameter()
     {
@@ -782,7 +780,6 @@ class AuthorsTest extends TestCase
     }
     /**
      * @test
-     * @watch
      */
     public function it_can_sort_authors_by_multiple_attributes_through_a_sort_query_parameter()
     {
@@ -844,7 +841,6 @@ class AuthorsTest extends TestCase
     }
     /**
      * @test
-     * @watch
      */
     public function it_can_sort_authors_by_multiple_attributes_in_descending_order_through_a_sort_query_parameter()
     {
@@ -901,6 +897,142 @@ class AuthorsTest extends TestCase
                         'updated_at' => $authors[1]->updated_at->toJSON(),
                     ]
                 ],
+            ]
+        ]);
+    }
+    /**
+     * @test
+     */
+    public function it_can_paginate_authors_through_a_page_query_parameter()
+    {
+        $user = factory(User::class)->create();
+        Passport::actingAs($user);
+        $authors = factory(Author::class, 10)->create();
+
+        $this->get('/api/v1/authors?page[size]=5&page[number]=1', [
+            'accept' => 'application/vnd.api+json',
+            'content-type' => 'application/vnd.api+json',
+        ])->assertStatus(200)->assertJson([
+            "data" => [
+                [
+                    "id" => '1',
+                    "type" => "authors",
+                    "attributes" => [
+                        'name' => $authors[0]->name,
+                        'created_at' => $authors[0]->created_at->toJSON(),
+                        'updated_at' => $authors[0]->updated_at->toJSON(),
+                    ]
+                ],
+                [
+                    "id" => '2',
+                    "type" => "authors",
+                    "attributes" => [
+                        'name' => $authors[1]->name,
+                        'created_at' => $authors[1]->created_at->toJSON(),
+                        'updated_at' => $authors[1]->updated_at->toJSON(),
+                    ]
+                ],
+                [
+                    "id" => '3',
+                    "type" => "authors",
+                    "attributes" => [
+                        'name' => $authors[2]->name,
+                        'created_at' => $authors[2]->created_at->toJSON(),
+                        'updated_at' => $authors[2]->updated_at->toJSON(),
+                    ]
+                ],
+                [
+                    "id" => '4',
+                    "type" => "authors",
+                    "attributes" => [
+                        'name' => $authors[3]->name,
+                        'created_at' => $authors[3]->created_at->toJSON(),
+                        'updated_at' => $authors[3]->updated_at->toJSON(),
+                    ]
+                ],
+                [
+                    "id" => '5',
+                    "type" => "authors",
+                    "attributes" => [
+                        'name' => $authors[4]->name,
+                        'created_at' => $authors[4]->created_at->toJSON(),
+                        'updated_at' => $authors[4]->updated_at->toJSON(),
+                    ]
+                ],
+            ],
+            'links' => [
+                'first' => route('authors.index', ['page[size]' => 5, 'page[number]' => 1]),
+                'last' => route('authors.index', ['page[size]' => 5, 'page[number]' => 2]),
+                'prev' => null,
+                'next' => route('authors.index', ['page[size]' => 5, 'page[number]' => 2]),
+            ]
+        ]);
+    }
+    /**
+     * @test
+     */
+    public function it_can_paginate_authors_through_a_page_query_parameter_and_show_different_pages()
+    {
+        $user = factory(User::class)->create();
+        Passport::actingAs($user);
+        $authors = factory(Author::class, 10)->create();
+
+        $this->get('/api/v1/authors?page[size]=5&page[number]=2', [
+            'accept' => 'application/vnd.api+json',
+            'content-type' => 'application/vnd.api+json',
+        ])->assertStatus(200)->assertJson([
+            "data" => [
+                [
+                    "id" => '6',
+                    "type" => "authors",
+                    "attributes" => [
+                        'name' => $authors[5]->name,
+                        'created_at' => $authors[5]->created_at->toJSON(),
+                        'updated_at' => $authors[5]->updated_at->toJSON(),
+                    ]
+                ],
+                [
+                    "id" => '7',
+                    "type" => "authors",
+                    "attributes" => [
+                        'name' => $authors[6]->name,
+                        'created_at' => $authors[6]->created_at->toJSON(),
+                        'updated_at' => $authors[6]->updated_at->toJSON(),
+                    ]
+                ],
+                [
+                    "id" => '8',
+                    "type" => "authors",
+                    "attributes" => [
+                        'name' => $authors[7]->name,
+                        'created_at' => $authors[7]->created_at->toJSON(),
+                        'updated_at' => $authors[7]->updated_at->toJSON(),
+                    ]
+                ],
+                [
+                    "id" => '9',
+                    "type" => "authors",
+                    "attributes" => [
+                        'name' => $authors[8]->name,
+                        'created_at' => $authors[8]->created_at->toJSON(),
+                        'updated_at' => $authors[8]->updated_at->toJSON(),
+                    ]
+                ],
+                [
+                    "id" => '10',
+                    "type" => "authors",
+                    "attributes" => [
+                        'name' => $authors[9]->name,
+                        'created_at' => $authors[9]->created_at->toJSON(),
+                        'updated_at' => $authors[9]->updated_at->toJSON(),
+                    ]
+                ],
+            ],
+            'links' => [
+                'first' => route('authors.index', ['page[size]' => 5, 'page[number]' => 1]),
+                'last' => route('authors.index', ['page[size]' => 5, 'page[number]' => 2]),
+                'prev' => route('authors.index', ['page[size]' => 5, 'page[number]' => 1]),
+                'next' => null,
             ]
         ]);
     }
