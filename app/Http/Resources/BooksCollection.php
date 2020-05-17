@@ -25,10 +25,8 @@ class BooksCollection extends ResourceCollection
 
     private function mergeIncludedRelations($request)
     {
-        $includes = $this->collection->flatMap(function ($resource) use($request)
-        {
-            return $resource->included($request);
-        });
-        return $includes;
+        $includes = $this->collection->flatMap->included($request)->
+        unique()->values();
+        return $includes->isNotEmpty() ? $includes : new MissingValue();
     }
 }
