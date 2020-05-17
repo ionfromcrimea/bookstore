@@ -85,7 +85,6 @@ class HandlerTest extends TestCase
     }
     /**
      * @test
-     * @watch
      */
     public function it_converts_a_query_exception_into_a_not_found_exception()
     {
