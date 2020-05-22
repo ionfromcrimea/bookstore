@@ -50,20 +50,23 @@ class BooksRelationshipsTest extends TestCase
                                     ['book' => $book->id]
                                 ),
                             ],
-                            'data' => [
-                                [
-                                    'id' => $authors->get(0)->id,
-                                    'type' => 'authors'
-                                ],
-                                [
-                                    'id' => $authors->get(1)->id,
-                                    'type' => 'authors'
-                                ],
-                                [
-                                    'id' => $authors->get(2)->id,
-                                    'type' => 'authors'
-                                ]
-                            ]
+                            /**
+                             * "data" влючается только при получении параметра include в запросе
+                             */
+//                            'data' => [
+//                                [
+//                                    'id' => $authors->get(0)->id,
+//                                    'type' => 'authors'
+//                                ],
+//                                [
+//                                    'id' => $authors->get(1)->id,
+//                                    'type' => 'authors'
+//                                ],
+//                                [
+//                                    'id' => $authors->get(2)->id,
+//                                    'type' => 'authors'
+//                                ]
+//                            ]
                         ]
                     ]
                 ]
@@ -118,7 +121,7 @@ class BooksRelationshipsTest extends TestCase
         $user = factory(User::class)->create();
         Passport::actingAs($user);
 
-        $this->patchJson('/api/v1/books/1/relationships/authors',[
+        $this->patchJson('/api/v1/books/1/relationships/authors', [
             'data' => [
                 [
                     'id' => '5',
@@ -156,7 +159,7 @@ class BooksRelationshipsTest extends TestCase
         $user = factory(User::class)->create();
         Passport::actingAs($user);
 
-        $this->patchJson('/api/v1/books/1/relationships/authors',[
+        $this->patchJson('/api/v1/books/1/relationships/authors', [
             'data' => [
                 [
                     'id' => '1',
@@ -207,7 +210,7 @@ class BooksRelationshipsTest extends TestCase
         $user = factory(User::class)->create();
         Passport::actingAs($user);
 
-        $this->patchJson('/api/v1/books/1/relationships/authors',[
+        $this->patchJson('/api/v1/books/1/relationships/authors', [
             'data' => []
         ], [
             'accept' => 'application/vnd.api+json',
@@ -238,7 +241,7 @@ class BooksRelationshipsTest extends TestCase
         $user = factory(User::class)->create();
         Passport::actingAs($user);
 
-        $this->patchJson('/api/v1/books/1/relationships/authors',[
+        $this->patchJson('/api/v1/books/1/relationships/authors', [
             'data' => [
                 [
                     'id' => '5',
@@ -255,7 +258,7 @@ class BooksRelationshipsTest extends TestCase
         ])->assertStatus(404)->assertJson([
             'errors' => [
                 [
-                    'title'   => 'Not Found Http Exception',
+                    'title' => 'Not Found Http Exception',
                     'details' => 'Resource not found',
                 ]
             ]
@@ -274,7 +277,7 @@ class BooksRelationshipsTest extends TestCase
         $user = factory(User::class)->create();
         Passport::actingAs($user);
 
-        $this->patchJson('/api/v1/books/1/relationships/authors',[
+        $this->patchJson('/api/v1/books/1/relationships/authors', [
             'data' => [
                 [
                     'type' => 'authors',
@@ -286,7 +289,7 @@ class BooksRelationshipsTest extends TestCase
         ])->assertStatus(422)->assertJson([
             'errors' => [
                 [
-                    'title'   => 'Validation Error',
+                    'title' => 'Validation Error',
                     'details' => 'The data.0.id field is required.',
                     'source' => [
                         'pointer' => '/data/0/id',
@@ -308,7 +311,7 @@ class BooksRelationshipsTest extends TestCase
         $user = factory(User::class)->create();
         Passport::actingAs($user);
 
-        $this->patchJson('/api/v1/books/1/relationships/authors',[
+        $this->patchJson('/api/v1/books/1/relationships/authors', [
             'data' => [
                 [
                     'id' => 5,
@@ -321,7 +324,7 @@ class BooksRelationshipsTest extends TestCase
         ])->assertStatus(422)->assertJson([
             'errors' => [
                 [
-                    'title'   => 'Validation Error',
+                    'title' => 'Validation Error',
                     'details' => 'The data.0.id must be a string.',
                     'source' => [
                         'pointer' => '/data/0/id',
@@ -343,7 +346,7 @@ class BooksRelationshipsTest extends TestCase
         $user = factory(User::class)->create();
         Passport::actingAs($user);
 
-        $this->patchJson('/api/v1/books/1/relationships/authors',[
+        $this->patchJson('/api/v1/books/1/relationships/authors', [
             'data' => [
                 [
                     'id' => '5',
@@ -355,7 +358,7 @@ class BooksRelationshipsTest extends TestCase
         ])->assertStatus(422)->assertJson([
             'errors' => [
                 [
-                    'title'   => 'Validation Error',
+                    'title' => 'Validation Error',
                     'details' => 'The data.0.type field is required.',
                     'source' => [
                         'pointer' => '/data/0/type',
@@ -377,7 +380,7 @@ class BooksRelationshipsTest extends TestCase
         $user = factory(User::class)->create();
         Passport::actingAs($user);
 
-        $this->patchJson('/api/v1/books/1/relationships/authors',[
+        $this->patchJson('/api/v1/books/1/relationships/authors', [
             'data' => [
                 [
                     'id' => '5',
@@ -390,7 +393,7 @@ class BooksRelationshipsTest extends TestCase
         ])->assertStatus(422)->assertJson([
             'errors' => [
                 [
-                    'title'   => 'Validation Error',
+                    'title' => 'Validation Error',
                     'details' => 'The selected data.0.type is invalid.',
                     'source' => [
                         'pointer' => '/data/0/type',
@@ -399,6 +402,7 @@ class BooksRelationshipsTest extends TestCase
             ]
         ]);
     }
+
     /**
      * @test
      * @@wat
@@ -413,7 +417,7 @@ class BooksRelationshipsTest extends TestCase
         $user = factory(User::class)->create();
         Passport::actingAs($user);
 
-        $this->getJson('/api/v1/books/1/authors',[
+        $this->getJson('/api/v1/books/1/authors', [
             'accept' => 'application/vnd.api+json',
             'content-type' => 'application/vnd.api+json',
         ])
@@ -450,6 +454,7 @@ class BooksRelationshipsTest extends TestCase
                 ]
             ]);
     }
+
     /**
      * @test
      * @watch
@@ -528,6 +533,7 @@ class BooksRelationshipsTest extends TestCase
                 ]
             ]);
     }
+
     /**
      * @test
      * @wat
@@ -549,6 +555,7 @@ class BooksRelationshipsTest extends TestCase
                 'included' => [],
             ]);
     }
+
     /**
      * @test
      * @watch
@@ -557,8 +564,8 @@ class BooksRelationshipsTest extends TestCase
     {
         $books = factory(Book::class, 3)->create();
         $authors = factory(Author::class, 3)->create();
-        $books->each(function($book, $key) use($authors){
-            if($key === 0){
+        $books->each(function ($book, $key) use ($authors) {
+            if ($key === 0) {
                 $book->authors()->sync($authors->pluck('id'));
             }
         });
@@ -692,6 +699,7 @@ class BooksRelationshipsTest extends TestCase
             ]
         ]);
     }
+
     /**
      * @test
      * @watch
@@ -711,6 +719,7 @@ class BooksRelationshipsTest extends TestCase
                 'included' => [],
             ]);
     }
+
     /**
      * @test
      * @watch
@@ -719,7 +728,7 @@ class BooksRelationshipsTest extends TestCase
     {
         $books = factory(Book::class, 3)->create();
         $authors = factory(Author::class, 3)->create();
-        $books->each(function($book, $key) use($authors){
+        $books->each(function ($book, $key) use ($authors) {
             $book->authors()->sync($authors->pluck('id'));
         });
 

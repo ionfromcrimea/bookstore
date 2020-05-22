@@ -27,7 +27,7 @@ class BooksController extends Controller
         ])
             ->allowedIncludes('authors')
             ->jsonPaginate();
-
+//        return view('dd', compact('books'));
         return new BooksCollection($books);
     }
 
@@ -72,6 +72,7 @@ class BooksController extends Controller
         $query = QueryBuilder::for(Book::where('id', $book))
             ->allowedIncludes('authors')
             ->firstOrFail();
+//        return view('dd', compact('query'));
         return new BooksResource($query);
     }
 
