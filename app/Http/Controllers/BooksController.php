@@ -28,7 +28,7 @@ class BooksController extends Controller
             ->allowedIncludes('authors')
             ->jsonPaginate();
 //        return view('dd', compact('books'));
-        return new BooksCollection($books);
+         return new BooksCollection($books);
     }
 
     /**

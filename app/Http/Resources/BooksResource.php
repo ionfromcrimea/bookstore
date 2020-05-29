@@ -61,11 +61,9 @@ class BooksResource extends JsonResource
     public function with($request)
     {
         $with = [];
-
         if ($this->included($request)->isNotEmpty()) {
             $with['included'] = $this->included($request);
         }
-
         return $with;
     }
 
